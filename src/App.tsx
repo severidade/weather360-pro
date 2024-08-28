@@ -24,12 +24,12 @@ function App() {
       return false;
     }
 
-    setError(null); // Limpa o erro se a validação for bem-sucedida
+    setError(null);
     return true;
   }
 
   async function searchCity(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault(); // evita o recarregamento da página
+    event.preventDefault();
     const city = inputRef.current?.value;
     const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
@@ -40,15 +40,15 @@ function App() {
     }
 
     if (inputRef.current) {
-      inputRef.current.value = ''; // Limpa o campo de input após a validação de entrada de dados
+      inputRef.current.value = '';
     }
 
     try {
       setError(null);
-
       const { data } = await axios.get(url);
+
+      console.log('Dados do clima recebidos:', data);
       setWeather(data);
-      console.log(weather);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         if (err.response && err.response.status === 404) {
@@ -58,6 +58,10 @@ function App() {
         }
       } else {
         setError('Ocorreu um erro inesperado.');
+      }
+    } finally {
+      if (inputRef.current) {
+        inputRef.current.value = '';
       }
     }
   }
@@ -76,12 +80,30 @@ function App() {
       </form>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {weather && weather.name && (
-        <p>
-          O nome da cidade é
-          {' '}
-          {weather.name}
-        </p>
+      {weather && (
+        <div className="weather-info">
+          <h2>{weather.name}</h2>
+          <p>
+            Temperatura:
+            {weather.main.temp}
+            °C
+          </p>
+          <p>
+            Descrição:
+            {weather.weather[0].description}
+          </p>
+          <p>
+            Umidade:
+            {weather.main.humidity}
+            %
+          </p>
+          <p>
+            Velocidade do Vento:
+            {weather.wind.speed}
+            {' '}
+            m/s
+          </p>
+        </div>
       )}
     </>
   );
