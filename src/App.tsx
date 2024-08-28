@@ -6,9 +6,9 @@ import { useState, useRef } from 'react';
 function App() {
   const [weather, setWeather] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // const [error, setError] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   async function searchCity(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); // evita o recarregamento da página
@@ -20,6 +20,10 @@ function App() {
       return;
     }
 
+    if (inputRef.current) {
+      inputRef.current.value = ''; // Limpa o campo de input
+    }
+
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
 
     try {
@@ -27,7 +31,7 @@ function App() {
 
       const { data } = await axios.get(url);
       setWeather(data);
-      // console.log(weather);
+      console.log(weather);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         // Verifica se é um erro do Axios
@@ -46,7 +50,12 @@ function App() {
     <>
       <h1>Weather360 Pro</h1>
       <form onSubmit={searchCity}>
-        <input ref={inputRef} type="text" placeholder="Digite o nome da cidade" />
+        <input
+          ref={inputRef}
+          inputMode="text"
+          type="text"
+          placeholder="Digite o nome da cidade"
+        />
         <button type="submit">Buscar</button>
       </form>
 
