@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState, useRef } from 'react';
 
 function App() {
-  const [weather, setWeather] = useState<any | null>(null);
+  const [weatherInfo, setWeatherInfo] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -30,7 +30,9 @@ function App() {
 
   async function searchCity(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const city = inputRef.current?.value;
+    setWeatherInfo(null);
+
+    const city = (inputRef.current?.value || '').trim().replace(/\s{2,}/g, ' ').toLowerCase();
     const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
 
@@ -40,7 +42,7 @@ function App() {
     }
 
     if (inputRef.current) {
-      inputRef.current.value = '';
+      inputRef.current.value = ''; // Limpa o campo de input após a validação de entrada de dados
     }
 
     try {
@@ -48,7 +50,7 @@ function App() {
       const { data } = await axios.get(url);
 
       console.log('Dados do clima recebidos:', data);
-      setWeather(data);
+      setWeatherInfo(data);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         if (err.response && err.response.status === 404) {
@@ -80,26 +82,26 @@ function App() {
       </form>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {weather && (
+      {weatherInfo && (
         <div className="weather-info">
-          <h2>{weather.name}</h2>
+          <h2>{weatherInfo.name}</h2>
           <p>
             Temperatura:
-            {weather.main.temp}
+            {weatherInfo.main.temp}
             °C
           </p>
           <p>
             Descrição:
-            {weather.weather[0].description}
+            {weatherInfo.weather[0].description}
           </p>
           <p>
             Umidade:
-            {weather.main.humidity}
+            {weatherInfo.main.humidity}
             %
           </p>
           <p>
             Velocidade do Vento:
-            {weather.wind.speed}
+            {weatherInfo.wind.speed}
             {' '}
             m/s
           </p>
