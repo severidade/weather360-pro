@@ -1,50 +1,25 @@
-# React + TypeScript + Vite
+# Documentação: Tratamento de Erros ao Fazer Requisição à API do OpenWeatherMap
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Requisitos
 
-Currently, two official plugins are available:
+### 1. Verificação de Campo Preenchido
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Objetivo:** Garantir que o usuário preencha o campo de entrada antes de enviar a requisição.
+- **Mensagem de Erro:** Se o campo de entrada estiver vazio, exiba a mensagem: **"Por favor, digite o nome de uma cidade."**
 
-## Expanding the ESLint configuration
+### 2. Feedback ao Usuário Após Envio de Requisição à API
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### 2.1. Verificação do Status da Resposta 404
 
-- Configure the top-level `parserOptions` property like this:
+- **Objetivo:** Informar ao usuário se a cidade digitada não for encontrada na base de dados da API.
+- **Mensagem de Erro:** Se a resposta da API for `404`, exiba a mensagem: **"Cidade não encontrada. Por favor, verifique o nome e tente novamente."**
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+#### 2.2. Erros do Axios
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **Objetivo:** Tratar erros específicos do Axios, como problemas de rede ou erros internos da API, que não sejam relacionados a um status `404`.
+- **Mensagem de Erro:** Para erros diferentes de `404`, exiba a mensagem: **"Erro ao buscar os dados do clima. Tente novamente mais tarde."**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+#### 2.3. Erros Não Relacionados
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **Objetivo:** Capturar e tratar erros que podem ocorrer fora dos contextos acima, como erros inesperados em outras partes do código.
+- **Mensagem de Erro:** **"Ocorreu um erro inesperado."**
