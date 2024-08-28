@@ -8,14 +8,22 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  function validateInput(): boolean {
-    const value = inputRef.current?.value || '';
+  function validateInput(city: string): boolean {
     const regex = /^[A-Za-zÀ-ÿ\s]+$/;
 
-    if (!regex.test(value)) {
-      setError('Por favor, insira apenas letras e espaços.');
+    if (!city) {
+      setError('Por favor, digite o nome de uma cidade.');
       return false;
     }
+
+    if (!regex.test(city)) {
+      setError('Por favor, insira apenas letras e espaços.');
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
+      return false;
+    }
+
     setError(null); // Limpa o erro se a validação for bem-sucedida
     return true;
   }
@@ -24,21 +32,16 @@ function App() {
     event.preventDefault(); // evita o recarregamento da página
     const city = inputRef.current?.value;
     const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
 
-    if (!city) {
-      setError('Por favor, digite o nome de uma cidade.');
-      return;
+    // Verificando a entrada de dados
+    if (!validateInput(city)) {
+      return; // para se a validação falhar
     }
 
     if (inputRef.current) {
-      inputRef.current.value = ''; // Limpa o campo de input
+      inputRef.current.value = ''; // Limpa o campo de input após a validação de entrada de dados
     }
-
-    if (!validateInput()) {
-      return; // Não continua se a validação falhar
-    }
-
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
 
     try {
       setError(null);
@@ -48,7 +51,6 @@ function App() {
       console.log(weather);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        // Verifica se é um erro do Axios
         if (err.response && err.response.status === 404) {
           setError('Cidade não encontrada. Por favor, verifique o nome e tente novamente.');
         } else {
