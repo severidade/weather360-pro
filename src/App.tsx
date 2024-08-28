@@ -8,7 +8,17 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // const [error, setError] = useState<boolean>(false);
+  function validateInput(): boolean {
+    const value = inputRef.current?.value || '';
+    const regex = /^[A-Za-zÀ-ÿ\s]+$/;
+
+    if (!regex.test(value)) {
+      setError('Por favor, insira apenas letras e espaços.');
+      return false;
+    }
+    setError(null); // Limpa o erro se a validação for bem-sucedida
+    return true;
+  }
 
   async function searchCity(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); // evita o recarregamento da página
@@ -22,6 +32,10 @@ function App() {
 
     if (inputRef.current) {
       inputRef.current.value = ''; // Limpa o campo de input
+    }
+
+    if (!validateInput()) {
+      return; // Não continua se a validação falhar
     }
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
