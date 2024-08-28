@@ -6,9 +6,12 @@ import { useState, useRef } from 'react';
 function App() {
   const [weather, setWeather] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // const [error, setError] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  async function searchCity() {
+  async function searchCity(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault(); // evita o recarregamento da página
     const city = inputRef.current?.value;
     const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
 
@@ -20,22 +23,24 @@ function App() {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
 
     try {
-      setError(null); // Limpa o erro antes da nova requisição
+      setError(null);
       const { data } = await axios.get(url);
       setWeather(data);
+      console.log(weather);
     } catch (error) {
+      console.log(error);
       setError('Erro ao buscar os dados do clima.');
     }
   }
 
   return (
     <>
-      <h1>Olá mundo</h1>
-      <p>este é meu app</p>
-      <input ref={inputRef} type="text" placeholder="Digite o nome da cidade" />
-      <button type="button" onClick={searchCity}>
-        Buscar
-      </button>
+      <h1>Weather360 Pro</h1>
+      <form onSubmit={searchCity}>
+        <input ref={inputRef} type="text" placeholder="Digite o nome da cidade" />
+        <button type="submit">Buscar</button>
+      </form>
+
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {weather && weather.name && (
         <p>
