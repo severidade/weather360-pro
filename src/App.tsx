@@ -24,12 +24,21 @@ function App() {
 
     try {
       setError(null);
+
       const { data } = await axios.get(url);
       setWeather(data);
-      console.log(weather);
-    } catch (error) {
-      console.log(error);
-      setError('Erro ao buscar os dados do clima.');
+      // console.log(weather);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        // Verifica se é um erro do Axios
+        if (err.response && err.response.status === 404) {
+          setError('Cidade não encontrada. Por favor, verifique o nome e tente novamente.');
+        } else {
+          setError('Erro ao buscar os dados do clima. Tente novamente mais tarde.');
+        }
+      } else {
+        setError('Ocorreu um erro inesperado.');
+      }
     }
   }
 
