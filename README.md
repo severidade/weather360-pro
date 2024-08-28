@@ -1,3 +1,7 @@
+# sobre a aplicação
+Este aplicativo permite ao usuário buscar informações meteorológicas de uma cidade específica, utilizando a API do OpenWeatherMap. 
+
+
 # Documentação: Tratamento de Erros ao Fazer Requisição à API do OpenWeatherMap
 
 ## Requisitos
