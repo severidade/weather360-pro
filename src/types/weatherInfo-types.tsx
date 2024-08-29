@@ -13,4 +13,7 @@ export interface WeatherInfo {
     temp_max: number;
     humidity: number;
   };
+  wind: {
+    speed: number;
+  }
 }
