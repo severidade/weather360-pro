@@ -1,4 +1,4 @@
-# sobre a aplicação
+# Weather360 Pro
 Este aplicativo permite ao usuário buscar informações meteorológicas de uma cidade específica, utilizando a API do OpenWeatherMap. 
 
 
@@ -27,3 +27,18 @@ Este aplicativo permite ao usuário buscar informações meteorológicas de uma 
 
 - **Objetivo:** Capturar e tratar erros que podem ocorrer fora dos contextos acima, como erros inesperados em outras partes do código.
 - **Mensagem de Erro:** **"Ocorreu um erro inesperado."**
+
+
+## Melhorias na Experiência do Usuário
+
+Para melhorar a usabilidade da aplicação e retornar o nome dos países, e não somente as siglas, criei, com a ajuda do ChatGPT, um [arquivo que mapeia](https://github.com/severidade/weather360-pro/blob/main/src/utils/countries.tsx) cada sigla de país para o nome completo correspondente, cobrindo todas as nações reconhecidas pela ISO 3166-1.
+
+Importei o arquivo com o mapeamento no componente [DailyWeather](https://github.com/severidade/weather360-pro/blob/main/src/components/DailyWeather/index.tsx) e o utilize para obter o nome completo do país com base na sigla fornecida pela API.
+
+### Exemplo de Código
+
+```typescript
+const countryName = countryMapping[data.sys.country] || data.sys.country;
+```
+
+O código acima verifica diretamente se a sigla do país ``data.sys.country`` existe como uma chave no objeto ``countryMapping``. Se encontrar a chave, retorna o valor correspondente ao nome completo do país. Caso não encontre, retorna a própria sigla do país.
