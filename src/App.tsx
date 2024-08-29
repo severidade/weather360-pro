@@ -84,21 +84,19 @@ function App() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {weatherInfo && (
         <div className="weather-info">
-          <h2>{weatherInfo.name}</h2>
-          <p>
-            Temperatura:
-            {weatherInfo.main.temp}
-            °C
-          </p>
-          <p>
-            Descrição:
-            {weatherInfo.weather[0].description}
-          </p>
-          <p>
-            Umidade:
-            {weatherInfo.main.humidity}
-            %
-          </p>
+          <div>
+            <h2>{weatherInfo.name}</h2>
+            <p>{`País: ${weatherInfo.sys.country}`}</p>
+            <img src={`http://openweathermap.org/img/wn/${weatherInfo.weather[0].icon}.png`} alt="" />
+            <p>{`Descrição: ${weatherInfo.weather[0].description}`}</p>
+          </div>
+          <div>
+            <p>{`Temperatura: ${weatherInfo.main.temp}°C`}</p>
+            <p>{`Temperatura: Minima: ${weatherInfo.main.temp_min}°C`}</p>
+            <p>{`Temperatura: Minima: ${weatherInfo.main.temp_max}°C`}</p>
+          </div>
+
+          <p>{`Umidade: ${weatherInfo.main.humidity}%`}</p>
           <p>
             Velocidade do Vento:
             {weatherInfo.wind.speed}
@@ -112,3 +110,7 @@ function App() {
 }
 
 export default App;
+
+// para saber quantos icones preciso
+// https://github.com/yuvraaaj/openweathermap-api-icons
+// https://openweathermap.org/weather-conditions
