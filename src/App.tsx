@@ -97,12 +97,7 @@ function App() {
           </div>
 
           <p>{`Umidade: ${weatherInfo.main.humidity}%`}</p>
-          <p>
-            Velocidade do Vento:
-            {weatherInfo.wind.speed}
-            {' '}
-            m/s
-          </p>
+
         </div>
       )}
     </>
