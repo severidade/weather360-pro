@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+import classNames from 'classnames';
 import { WeatherInfo } from '../../types/weatherInfo-types.tsx';
 import styles from './DailyWeather.module.css';
 
@@ -12,12 +13,19 @@ function DailyWeather({ weatherInfo }: DailyWeatherProps) {
   }
 
   // const weatherIconClassName = `icon ${weatherInfo.weather[0].icon} `;
+  // const iconClass = classNames(styles.icon, weatherInfo.weather[0].icon);
+
+  // const weatherIcon = `icon${weatherInfo.weather[0].icon}`; // "01n" becomes "icon01n"
+  // const iconClass = styles[weatherIcon]; // Access the style with the generated string
+
+  const iconClass2 = classNames(styles.icon, styles[`icon${weatherInfo.weather[0].icon}`]);
+
   return (
     <div className={styles.weather_info}>
       <div>
         <h2>{weatherInfo.name}</h2>
         <p>{`País: ${weatherInfo.sys.country}`}</p>
-        <div className={`icon ${weatherInfo.weather[0].icon} `}>
+        <div className={iconClass2}>
           Ícone para
           {' '}
           {weatherInfo.weather[0].description}

@@ -1,3 +1,82 @@
 .weather_info {
   background-color: tomato;
+  position: relative;
+  z-index: -1;
+}
+
+.icon{
+  width: 130px;
+  height: 130px;
+  overflow: hidden;
+  text-indent: -1000px;
+  position: relative;
+}
+
+.icon::before {
+  content: "";
+  width: 85%;
+  height: 85%;
+  /* background: url("../assets/img/black_texture.png") repeat; */
+  background: black;
+  border-radius: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* ceu limpo noite */
+.icon01n {
+  background: url("../../assets/icon/animated/night.svg") no-repeat 10px 0 / contain;;
+}
+
+/* ceu limpo dia */
+.icon01d {
+  background: url("../../assets/icon/animated/day.svg") no-repeat 10px 0 / contain;;
+}
+
+/* nublado noite */
+.icon02n {
+  background: url("../../assets/icon/animated/cloudy-night-3.svg") no-repeat -10px 0 / contain;;
+}
+
+/* nublado dia */
+.icon02d {
+  background: url("../../assets/icon/animated/cloudy-day-3.svg") no-repeat -10px 0 / contain;;
+}
+
+/* nuvens dispersas noite */
+.icon03n, .icon04n {
+  background: url("../../assets/icon/animated/cloudy.svg") no-repeat -4px 0 / contain;;
+}
+
+/* nuvens dispersas dia */
+.icon03d, .icon04d {
+  background: url("../../assets/icon/animated/cloudy.svg") no-repeat -4px 0 / contain;;
+}
+
+/* chuva leve  noite */
+.icon09n, .icon10n {
+  background: url("../../assets/icon/animated/rainy-5.svg") no-repeat 15px 2px / contain;;
+}
+
+/* chuva leve dia */
+.icon09d, .icon10d {
+  background: url("../../assets/icon/animated/rainy-1.svg") no-repeat 15px 2px / contain;;
+}
+
+/* Tempestade */
+.icon11d, .icon11n {
+  background: url("../../assets/icon/animated/thunder.svg") no-repeat 10px 0 / contain;;
+}
+
+/* Nevando dia*/
+.icon11d {
+  background: url("../../assets/icon/animated/snowy-3.svg") no-repeat 10px 0 / contain;;
+}
+
+/* Nevando noite*/
+.icon11n {
+  background: url("../../assets/icon/animated/snowy-6.svg") no-repeat 10px 0 / contain;;
 }
