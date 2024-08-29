@@ -2,10 +2,11 @@
 import './App.css';
 import axios from 'axios';
 import { useState, useRef } from 'react';
-import DailyWeather from './components/DailyWeather';
+import DailyWeather from './components/DailyWeather/index.tsx';
+import { WeatherInfo } from './types/weatherInfo-types.tsx';
 
 function App() {
-  const [weatherInfo, setWeatherInfo] = useState<any | null>(null);
+  const [todayWeatherInfo, setTodayWeatherInfo] = useState<WeatherInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,7 +32,7 @@ function App() {
 
   async function searchCity(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setWeatherInfo(null);
+    setTodayWeatherInfo(null);
 
     const city = (inputRef.current?.value || '').trim().replace(/\s{2,}/g, ' ').toLowerCase();
     const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
@@ -51,7 +52,7 @@ function App() {
       const { data } = await axios.get(url);
 
       console.log('Dados do clima recebidos:', data);
-      setWeatherInfo(data);
+      setTodayWeatherInfo(data);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         if (err.response && err.response.status === 404) {
@@ -84,7 +85,7 @@ function App() {
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <DailyWeather weatherInfo={weatherInfo} />
+      <DailyWeather data={todayWeatherInfo} />
     </>
   );
 }
