@@ -1,7 +1,7 @@
 .weather_info {
   background-color: tomato;
   position: relative;
-  z-index: -1;
+  z-index: 1;
 }
 
 .icon{
@@ -26,57 +26,28 @@
   z-index: -1;
 }
 
-/* ceu limpo noite */
-.icon01n {
-  background: url("../../assets/icon/animated/night.svg") no-repeat -5px -5px / contain;;
-}
+/* Nota: Para que "::before" do elemento com a classe "icon" possa ser corretamente posicionado abaixo do ícone usando z-index, o elemento pai "weather_info" deve ter "position" definido como "relative" e "z-index" definido como 1. Isso garante que o "::before" fique atrás do ícone, mas ainda dentro do contexto de empilhamento do pai. */
 
-/* ceu limpo dia */
-.icon01d {
-  background: url("../../assets/icon/animated/day.svg") no-repeat 0 0 / contain;;
-}
 
-/* nublado noite */
-.icon02n {
-  background: url("../../assets/icon/animated/cloudy-night-3.svg") no-repeat -10px 0 / contain;;
-}
+/* Ceu limpo */
+.icon01n { background: url("../../assets/icon/animated/night.svg") no-repeat -5px -5px / contain;} /* Noite */
+.icon01d { background: url("../../assets/icon/animated/day.svg") no-repeat 0 0 / contain;} /* Dia */
 
-/* nublado dia */
-.icon02d {
-  background: url("../../assets/icon/animated/cloudy-day-3.svg") no-repeat -10px 0 / contain;;
-}
+/* Nublado */
+.icon02n { background: url("../../assets/icon/animated/cloudy-night-3.svg") no-repeat 8px 0 / contain;} /* Noite */
+.icon02d { background: url("../../assets/icon/animated/cloudy-day-3.svg") no-repeat 8px 0 / contain;} /* Dia */
 
-/* nuvens dispersas noite */
-.icon03n, .icon04n {
-  background: url("../../assets/icon/animated/cloudy.svg") no-repeat -4px 0 / contain;;
-}
+/* Nuvens dispersas */
+.icon03n, .icon04n { background: url("../../assets/icon/animated/cloudy.svg") no-repeat -4px 0 / contain;} /* Noite */
+.icon03d, .icon04d { background: url("../../assets/icon/animated/cloudy.svg") no-repeat -4px 0 / contain;} /* Dia */
 
-/* nuvens dispersas dia */
-.icon03d, .icon04d {
-  background: url("../../assets/icon/animated/cloudy.svg") no-repeat -4px 0 / contain;;
-}
-
-/* chuva leve  noite */
-.icon09n, .icon10n {
-  background: url("../../assets/icon/animated/rainy-5.svg") no-repeat 15px 2px / contain;;
-}
-
-/* chuva leve dia */
-.icon09d, .icon10d {
-  background: url("../../assets/icon/animated/rainy-1.svg") no-repeat 15px 2px / contain;;
-}
+/* Chuva leve */
+.icon09n, .icon10n { background: url("../../assets/icon/animated/rainy-5.svg") no-repeat 15px 2px / contain;} /* Noite */
+.icon09d, .icon10d { background: url("../../assets/icon/animated/rainy-1.svg") no-repeat 15px 2px / contain;} /* Dia */
 
 /* Tempestade */
-.icon11d, .icon11n {
-  background: url("../../assets/icon/animated/thunder.svg") no-repeat 10px 0 / contain;;
-}
+.icon11d, .icon11n { background: url("../../assets/icon/animated/thunder.svg") no-repeat 10px 0 / contain;} /* Noite / Dia */
 
-/* Nevando dia*/
-.icon11d {
-  background: url("../../assets/icon/animated/snowy-3.svg") no-repeat 10px 0 / contain;;
-}
-
-/* Nevando noite*/
-.icon11n {
-  background: url("../../assets/icon/animated/snowy-6.svg") no-repeat 10px 0 / contain;;
-}
+/* Nevando */
+.icon11n { background: url("../../assets/icon/animated/snowy-6.svg") no-repeat 10px 0 / contain;} /* Noite */
+.icon11d { background: url("../../assets/icon/animated/snowy-3.svg") no-repeat 10px 0 / contain;} /* Dia */
