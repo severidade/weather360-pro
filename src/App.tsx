@@ -2,6 +2,7 @@
 import './App.css';
 import axios from 'axios';
 import { useState, useRef } from 'react';
+import DailyWeather from './components/DailyWeather';
 
 function App() {
   const [weatherInfo, setWeatherInfo] = useState<any | null>(null);
@@ -82,24 +83,8 @@ function App() {
       </form>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {weatherInfo && (
-        <div className="weather-info">
-          <div>
-            <h2>{weatherInfo.name}</h2>
-            <p>{`País: ${weatherInfo.sys.country}`}</p>
-            <img src={`http://openweathermap.org/img/wn/${weatherInfo.weather[0].icon}.png`} alt="" />
-            <p>{`Descrição: ${weatherInfo.weather[0].description}`}</p>
-          </div>
-          <div>
-            <p>{`Temperatura: ${weatherInfo.main.temp}°C`}</p>
-            <p>{`Temperatura: Minima: ${weatherInfo.main.temp_min}°C`}</p>
-            <p>{`Temperatura: Minima: ${weatherInfo.main.temp_max}°C`}</p>
-          </div>
 
-          <p>{`Umidade: ${weatherInfo.main.humidity}%`}</p>
-
-        </div>
-      )}
+      <DailyWeather weatherInfo={weatherInfo} />
     </>
   );
 }
