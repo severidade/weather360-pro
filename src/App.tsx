@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import { useState, useRef } from 'react';
 import DailyWeather from './components/DailyWeather/index.tsx';
+import Footer from './components/Footer/index.tsx';
 import { WeatherInfo } from './types/weatherInfo-types.tsx';
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <DailyWeather data={todayWeatherInfo} />
+      <Footer />
     </>
   );
 }
