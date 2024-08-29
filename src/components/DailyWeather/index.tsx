@@ -1,5 +1,7 @@
+/* eslint-disable max-len */
 /* eslint-disable react/react-in-jsx-scope */
 import classNames from 'classnames';
+import { countryMapping } from '../../utils/countries.tsx';
 import { WeatherInfo } from '../../types/weatherInfo-types.tsx';
 import styles from './DailyWeather.module.css';
 
@@ -18,14 +20,19 @@ function DailyWeather({ data }: DailyWeatherProps) {
   // const weatherIcon = `icon${weatherInfo.weather[0].icon}`; // "01n" becomes "icon01n"
   // const iconClass = styles[weatherIcon]; // Access the style with the generated string
 
-  const iconClass2 = classNames(styles.icon, styles[`icon${data.weather[0].icon}`]);
+  const iconClass = classNames(styles.icon, styles[`icon${data.weather[0].icon}`]);
+
+  const countryName = countryMapping[data.sys.country] || data.sys.country;
+  // Verifica diretamente se a sigla do país (data.sys.country) existe como uma chave no objeto countryMapping.
+  // Se encontrar a chave, retorna o valor correspondente (o nome completo do país);
+  // se não encontrar, retorna a própria sigla do país.
 
   return (
     <div className={styles.weather_info}>
       <div>
         <h2>{data.name}</h2>
-        <p>{`País: ${data.sys.country}`}</p>
-        <div className={iconClass2}>
+        <p>{`${countryName}, ${data.sys.country}`}</p>
+        <div className={iconClass}>
           Ícone para
           {' '}
           {data.weather[0].description}
