@@ -72,7 +72,8 @@ function App() {
 
   return (
     <>
-      <h1>Weather360 Pro</h1>
+      <h1 className="app_title">Weather360 Pro</h1>
+      <p className="app_sub_title">Dados recolhidos em tempo real da API OpenWeather.</p>
       <form onSubmit={searchCity}>
         <input
           ref={inputRef}
