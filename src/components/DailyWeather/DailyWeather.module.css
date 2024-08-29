@@ -28,12 +28,12 @@
 
 /* ceu limpo noite */
 .icon01n {
-  background: url("../../assets/icon/animated/night.svg") no-repeat 10px 0 / contain;;
+  background: url("../../assets/icon/animated/night.svg") no-repeat -5px -5px / contain;;
 }
 
 /* ceu limpo dia */
 .icon01d {
-  background: url("../../assets/icon/animated/day.svg") no-repeat 10px 0 / contain;;
+  background: url("../../assets/icon/animated/day.svg") no-repeat 0 0 / contain;;
 }
 
 /* nublado noite */
