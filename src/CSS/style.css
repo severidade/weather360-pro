@@ -54,3 +54,22 @@ main{
 .app_sub_title {
   text-align: center;
 }
+
+.card_title {
+  font-size: 28px;
+  display: flex;
+  flex-direction: column;
+  font-family: Kalnia, serif;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 1px;
+}
+
+.card_subtitle {
+  font-size: 16px;
+  display: flex;
+  gap: 10px;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: Lato, sans-serif;
+}

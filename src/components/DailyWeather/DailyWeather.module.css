@@ -48,10 +48,10 @@
 /* Tempestade */
 .icon11d, .icon11n { background: url("../../assets/icon/animated/thunder.svg") no-repeat 10px 0 / contain;} /* Noite / Dia */
 
-/* Nevando */
-.icon11n { background: url("../../assets/icon/animated/snowy-6.svg") no-repeat 10px 0 / contain;} /* Noite */
-.icon11d { background: url("../../assets/icon/animated/snowy-3.svg") no-repeat 10px 0 / contain;} /* Dia */
-
+/* Nevando 
+.icon11n { background: url("../../assets/icon/animated/snowy-6.svg") no-repeat 10px 0 / contain;} Noite
+.icon11d { background: url("../../assets/icon/animated/snowy-3.svg") no-repeat 10px 0 / contain;} Dia
+*/
 /* Névoa */
 .icon50d, .icon50n { background: url("../../assets/icon/animated/cloudy.svg") no-repeat -4px 0 / contain;} /* Dia e Noite*/
 /* obs: este icone representa nevoa ou fumaça. é preciso pesquisar um melhor  */

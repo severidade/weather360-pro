@@ -30,8 +30,8 @@ function DailyWeather({ data }: DailyWeatherProps) {
   return (
     <div className={styles.weather_info}>
       <div>
-        <h2>{data.name}</h2>
-        <p>{`${countryName}, ${data.sys.country}`}</p>
+        <h2 className="card_title">{data.name}</h2>
+        <p className="card_subtitle">{`${countryName}, ${data.sys.country}`}</p>
         <div className={iconClass}>
           Ícone para
           {' '}
