@@ -1,4 +1,4 @@
-# Weather360 Pro
+# Weather360 Pro *
 Este aplicativo permite ao usuário buscar informações meteorológicas de uma cidade específica, utilizando a API do OpenWeatherMap. 
 
 
